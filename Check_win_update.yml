@@ -11,5 +11,5 @@
     - name: Search for Windows Updates then log to C:\ansible_wu.txt
       win_updates:
         category_names: ['SecurityUpdates','CriticalUpdates','UpdateRollups', 'Updates', 'DefinitionUpdates']
-     state: searched
-     log_path: C:\ansible_wu.txt
+      state: searched
+      log_path: C:\ansible_wu.txt
