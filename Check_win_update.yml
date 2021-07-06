@@ -4,7 +4,7 @@
 # http://docs.ansible.com/ansible/win_updates_module.html
 # https://docs.ansible.com/ansible/win_reboot_module.html
 
-- name: "Search and return list of found updates (if any)"
+- name: Search and return list of found updates (if any)
   win_updates:
     category_names:
     - SecurityUpdates
