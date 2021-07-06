@@ -1,0 +1,12 @@
+---
+- name: Install google chrome
+  hosts: all
+  gather_facts: false
+  tasks:
+
+    - name: Run multi-lined shell commands
+      win_shell: |
+          $LocalTempDir = $env:TEMP
+          $ChromeInstaller = "ChromeInstaller.exe"
+          (new-object    System.Net.WebClient).DownloadFile('http://dl.google.com/chrome/install/375.126/chrome_installer.exe', "$LocalTempDir\$ChromeInstaller")
+          & "$LocalTempDir\$ChromeInstaller" /silent /install
