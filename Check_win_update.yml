@@ -1,17 +1,14 @@
---- 
-- 
-  gather_facts: false
-  hosts: all
-  name: "Windows Update"
-  tasks: 
-    - 
-      log_path: "C:\\ansible_wu.txt"
-      name: "Search for Windows Updates then log to C:\\ansible_wu.txt"
-      state: searched
-      win_updates: 
-        category_names: 
-          - SecurityUpdates
-          - CriticalUpdates
-          - UpdateRollups
-          - Updates
-          - DefinitionUpdates
+---
+#Ansible playbook to run Windows Update and restart, if required
+#
+# http://docs.ansible.com/ansible/win_updates_module.html
+# https://docs.ansible.com/ansible/win_reboot_module.html
+
+- name: "Search and return list of found updates (if any)"
+  win_updates:
+    category_names:
+    - SecurityUpdates
+    - CriticalUpdates
+    - UpdateRollups
+    state: searched
+    log_path: C:\ansible_wu.txt
