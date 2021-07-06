@@ -1,5 +1,5 @@
 ---
-#Ansible playbook to Check for Windows Update and Store in a text file
+#Ansible playbook to run Windows Update and restart, if required
 #
 # http://docs.ansible.com/ansible/win_updates_module.html
 # https://docs.ansible.com/ansible/win_reboot_module.html
@@ -9,10 +9,7 @@
   gather_facts: false
   tasks:
     - name: Search-only, return list of found updates (if any), log to C:\ansible_wu.txt
-     win_updates:
-     category_names: 
-     - SecurityUpdates
-     - CriticalUpdates
-     - UpdateRollups
+      win_updates:
+        category_names: ['SecurityUpdates','CriticalUpdates','UpdateRollups', 'Updates', 'DefinitionUpdates']
      state: searched
      log_path: C:\ansible_wu.txt
