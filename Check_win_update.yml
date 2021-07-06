@@ -1,5 +1,5 @@
 ---
-- name: Search and return list of found updates (if any)
+- name: Search and return list of found updates
   ansible.windows.win_updates:
     category_names:
       - SecurityUpdates
