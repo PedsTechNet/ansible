@@ -1,0 +1,14 @@
+---  
+- name:  Change hostname
+  hosts: all
+  gather_facts: false
+  tasks:
+       
+    - name: Change the hostname to sample-hostname
+      win_hostname:
+        name: "{{ compname }}"
+      register: res
+
+    - name: Reboot
+      win_reboot:
+      when: res.reboot_required
