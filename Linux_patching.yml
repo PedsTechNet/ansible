@@ -1,6 +1,6 @@
 ---
 - name: Patch Linux system
-  remote_user: administrator
+  remote_user: root
   hosts: all
   become: true
   ignore_errors: yes
