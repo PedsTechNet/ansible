@@ -1,0 +1,32 @@
+---
+- name: Patch Linux system
+  remote_user: administrator
+  hosts: all
+  become: true
+  ignore_errors: yes
+
+  tasks:
+    - name: Check RHN or local repository connectivity
+      shell:
+        cmd: yum repolist  > /dev/null 2>&1; if [ $? -eq 0 ]; then echo "Repository found"; else echo "No repository found"; fi
+      register: repo_status
+                      
+    - name: Failed if no repository found
+      fail:
+        msg: "repository not found on {{ ansible_hostname }}"
+      when: repo_status.stdout != "Repository found"
+                                                                  
+    - name: Check vsftpd running or not
+      shell: 
+        cmd: systemctl status vsftpd >/dev/null 2>&1; if [ $? -eq 0 ]; then echo 'vsftpd is running'; else echo 'vsftpd not running'; fi
+      register: vsftpd_status
+                                                                                
+    - name: Failed if vsftpd is running
+      fail:
+        msg: "vsftpd running on {{ ansible_hostname }}"
+      when: vsftpd_status.stdout != "vsftpd not running"
+   
+    - name: Apply patches
+      shell:
+        cmd: yum update -y
+      when: vsftpd_status.stdout == "vsftpd not running" and repo_status.stdout == "Repository found"
