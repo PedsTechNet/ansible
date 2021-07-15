@@ -1,0 +1,34 @@
+---
+automatic_reboot_after_update: yes
+check_win_updates_log_path: 'C:\ansible_win_updates.txt'
+db_query: Name,Value,Date,ExpiryDate
+db_table: Test_Table
+gateway_ip: '172.16.100.1'
+netmask: '255.255.255.0'
+sql_db_name: Test_Database
+sql_db_role: db_datareader
+sql_new_login_user: Johnny
+sql_new_login_user_password: 'mypassword'
+sql_server: 'WINDOWS2012R2'
+vm_cpu: 1
+vm_datacenter: 'Demo'
+vm_datastore: 'datastore1'
+vm_disk1_size: 40
+vm_disk2_size: 20
+vm_disk_type: 'thin'
+vm_dns_server: '172.16.100.131'
+vm_domain: 'domain.com'
+vm_network: 'VM Network'
+vm_ram: 4096
+vm_template: 'windows'
+win_drive: 'E'
+win_update_blacklist:
+  - Windows Malicious Software Removal Tool for Windows
+  - \d{4}-\d{2} Cumulative Update for Windows Server 2016
+win_update_category:
+  - SecurityUpdates
+  - CriticalUpdates
+  - UpdateRollups
+win_update_whitelist:
+  - KB4056892
+  - KB4073117
