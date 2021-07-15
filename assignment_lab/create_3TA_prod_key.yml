@@ -1,0 +1,26 @@
+---
+- name: Fetch Private Key from Bastion
+  hosts: tag_AnsibleGroup_bastions
+  become: yes
+
+  tasks:
+  - name: Install python-pip
+    yum:
+     name: python-pip
+     state: latest
+
+  - name: Install ansible-tower-cli with pip
+    pip:
+      name: ansible-tower-cli
+
+  - name: Inject Key into Ansible Tower
+    tower_credential:
+      name: Three_Tier_Prod_Key
+      organization: Default
+      state: present
+      tower_host: "{{ tower_node }}.{{ tower_guid }}.{{ tower_domain_path }}"
+      tower_username: "{{ tower_username }}"
+      tower_password: "{{ tower_password }}"
+      kind: ssh
+      username: "{{ three_tier_user }}"
+      ssh_key_data: "/root/.ssh/{{ hostvars[inventory_hostname]['ec2_tag_Project'] | regex_replace('three-tier-app-','') }}key.pem"

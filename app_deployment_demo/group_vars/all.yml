@@ -1,0 +1,8 @@
+---
+app_artifact_id: "hello"
+artifact_extension_type: "jar"
+app_folder: "/opt/app"
+app_group_id: "com.redhat.app"
+app_version: "1.0"
+maven_repository_url: "http://nexus.domain.com:8081/repository/maven-releases/"
+web_app_url: "http://app-server1:9080/hello
