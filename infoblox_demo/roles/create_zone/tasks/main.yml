@@ -1,0 +1,13 @@
+---
+- name: Create Zone
+  nios_zone:
+    name: "{{ zone_name }}"
+    view: "{{ dns_view }}"
+    grid_primary:
+      - name: "{{ primary_grid }}"
+    extattrs:
+      Site: "{{ site_info }}"
+    comment: "{{ zone_comments }}"
+    restart_if_needed: true
+    state: present
+    provider: "{{ nios_provider }}"

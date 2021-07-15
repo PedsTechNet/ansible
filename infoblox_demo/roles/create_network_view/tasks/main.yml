@@ -1,0 +1,9 @@
+---
+- name: Create Network View
+  nios_network_view:
+    name: "{{ network_view }}"
+    extattrs:
+      Site: "{{ site_info }}"
+    comment: "{{ network_view_comments }}"
+    state: present
+    provider: "{{ nios_provider }}"
