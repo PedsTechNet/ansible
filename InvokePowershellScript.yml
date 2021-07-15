@@ -1,0 +1,27 @@
+---
+- hosts: all
+  tasks:
+
+  - name: Run PowerShell command
+    win_shell: Set-Content -Path C:\temp\test.txt -Value 'Single line'
+
+  - name: Run multi-lined shell commands
+    win_shell: |
+        $text = Get-Content C:\Temp\test.txt
+        $text += ' additional text'
+        Set-Content -Path C:\Temp\test2.txt -Value $text
+        
+  - name: Copy script file from windows share to local
+    win_copy:
+      src: \\dc01.shliss.ru\folder\files\test.ps1
+      dest: c:\Temp\
+      remote_src: True
+    become: yes
+    become_method: runas
+    become_flags: logon_type=new_credentials logon_flags=netcredentials_only
+    vars:
+      ansible_become_user: SHLISS\shareuser
+      ansible_become_pass: ZAQ12wsx
+        
+  - name: Run locally a script 
+    win_shell: C:\temp\test.ps1

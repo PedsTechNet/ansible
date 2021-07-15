@@ -1,0 +1,18 @@
+- name:  Enable Remote Desktop Protocol
+  hosts: all
+  gather_facts: false
+  tasks:
+       
+    - name: Run PowerShell command
+      win_regedit:
+        path: HKLM:\System\CurrentControlSet\Control\Terminal Server
+        name: fDenyTSConnections 
+        data: 0x00000000
+        type: dword
+        state: present
+        
+    - name: Set service startup mode to auto and ensure it is started
+      win_service:
+        name: TermService
+        state: started
+
